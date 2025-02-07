@@ -30,19 +30,26 @@ public class ClassifyRESTController {
         }
 
         /*
-         * The record to store the information
-         * of the classified number.
+         * The record to store the information 
+         * of the classified number
          */
-        HashMap<String, Object> numberClassified = new HashMap<>();
-        NumberClassification numberClassification = new NumberClassification(number);
-        numberClassified.put("number", numberClassification.getNumber());
-        numberClassified.put("is_prime", numberClassification.isPrime());
-        numberClassified.put("is_perfect", numberClassification.isPerfect());
-        numberClassified.put("properties", numberClassification.getProperties());
-        numberClassified.put("digit_sum", numberClassification.digitSum());
-        numberClassified.put("fun_fact", numberClassification.funFact());
-
-        return new ResponseEntity(numberClassified, HttpStatus.OK);
+        try {
+            Integer num = Integer.parseInt(number);
+            HashMap<String, Object> numberClassified = new HashMap<>();
+            
+            NumberClassification numberClassification = new NumberClassification(num);
+            numberClassified.put("number", numberClassification.getNumber());
+            numberClassified.put("is_prime", numberClassification.isPrime());
+            numberClassified.put("is_perfect", numberClassification.isPerfect());
+            numberClassified.put("properties", numberClassification.getProperties());
+            numberClassified.put("digit_sum", numberClassification.digitSum());
+            numberClassified.put("fun_fact", numberClassification.funFact());
+            
+            return new ResponseEntity(numberClassified, HttpStatus.OK)
+        }
+        catch(NumberFormatException ex) {
+            return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // Helper method
