@@ -1,12 +1,12 @@
 package com.opf.project.ClassifyRESTController;
 
-import org.springframework.http.HttpStatus;
+import com.opf.project.ExceptionHandler.ErrorDetails;
+import com.opf.project.ExceptionHandler.GlobalExceptionHandler;
 import com.opf.project.ExceptionHandler.ResourceNotFoundException;
+import com.opf.project.NumberClassification.NumberClassification;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.opf.project.NumberClassification.NumberClassification;
-import com.opf.project.ExceptionHandler.ErrorDetails;
-import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class ClassifyRESTController {
          */
         try {
             int num = Integer.parseInt(number);
-            HashMap<String, Object> numberClassified = new HashMap<>();
+            Map<String, Object> numberClassified = new HashMap<>();
 
             /*
              * Check if integer is negative
@@ -69,7 +69,7 @@ public class ClassifyRESTController {
             // Attempt to parse the string into an integer
             Integer.parseInt(str);
             return true;
-        } catch (ResourceNotFoundException e) {
+        } catch (RuntimeException e) {
             // If a NumberFormatException occurs, it's not a valid integer
             return false;
         }
