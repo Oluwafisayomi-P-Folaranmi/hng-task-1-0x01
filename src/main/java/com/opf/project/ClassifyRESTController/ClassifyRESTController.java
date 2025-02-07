@@ -2,6 +2,7 @@ package com.opf.project.ClassifyRESTController;
 
 import com.opf.project.ExceptionHandler.ErrorDetails;
 import com.opf.project.ExceptionHandler.GlobalExceptionHandler;
+import com.opf.project.ExceptionHandler.NotANumberException;
 import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 import com.opf.project.NumberClassification.NumberClassification;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class ClassifyRESTController {
          */
         if (!isValidInteger(number)) {
             // If it's not a valid integer, return a 400 error response
-            return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
+            throw new NotANumberException();
         }
 
         /*
@@ -63,7 +64,9 @@ public class ClassifyRESTController {
         }
     }
 
-    // Helper method
+    /*
+     * Helper method
+     */
     private boolean isValidInteger(String str) {
         try {
             // Attempt to parse the string into an integer
@@ -73,5 +76,19 @@ public class ClassifyRESTController {
             // If a NumberFormatException occurs, it's not a valid integer
             return false;
         }
+    }
+
+    /*
+     * Exception handler method
+     */
+    @ExceptionHandler
+    public ResponseEntity<ErrorDetails> handleException(
+            NotANumberException exc
+    ) {
+        ErrorDetails error = new ErrorDetails();
+        error.setNumber("alphabet");
+        error.setError(true);
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
