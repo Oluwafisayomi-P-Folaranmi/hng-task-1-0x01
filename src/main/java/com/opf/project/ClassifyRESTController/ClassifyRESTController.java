@@ -42,7 +42,7 @@ public class ClassifyRESTController {
              * Check if integer is negative
              */
             if (num < 0) {
-                throw new NumberFormatException();
+                throw new ResourceNotFoundException();
             }
             
             NumberClassification numberClassification = new NumberClassification(num);
@@ -55,7 +55,7 @@ public class ClassifyRESTController {
             
             return new ResponseEntity(numberClassified, HttpStatus.OK)
         }
-        catch(NumberFormatException ex) {
+        catch(ResourceNotFoundException ex) {
             return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
         }
     }
@@ -66,7 +66,7 @@ public class ClassifyRESTController {
             // Attempt to parse the string into an integer
             Integer.parseInt(str);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (ResourceNotFoundException e) {
             // If a NumberFormatException occurs, it's not a valid integer
             return false;
         }
