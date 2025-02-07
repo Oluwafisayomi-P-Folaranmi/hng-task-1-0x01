@@ -18,13 +18,14 @@ public class ClassifyRESTController {
      * @return numberClassified
      */
     @GetMapping("/classify-number/{number}")
-    public Map<String, Object> classifyNumber(@PathVariable Integer number) {
+    public Map<String, Object> classifyNumber(@PathVariable String number) {
 
         /*
          * Check for exception in the path variable
          */
-        if (number <= 0) {
-            throw new ResourceNotFoundException();
+        if (!isValidInteger(number)) {
+            // If it's not a valid integer, return a 400 error response
+            return new ErrorResponse(number,"Invalid number format");
         }
 
         /*
@@ -41,5 +42,17 @@ public class ClassifyRESTController {
         numberClassified.put("fun_fact", numberClassification.funFact());
 
         return numberClassified;
+    }
+
+    // Helper method
+    private boolean isValidInteger(String str) {
+        try {
+            // Attempt to parse the string into an integer
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            // If a NumberFormatException occurs, it's not a valid integer
+            return false;
+        }
     }
 }
