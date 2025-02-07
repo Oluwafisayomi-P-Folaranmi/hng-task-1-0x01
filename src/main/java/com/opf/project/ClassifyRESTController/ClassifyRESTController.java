@@ -2,8 +2,11 @@ package com.opf.project.ClassifyRESTController;
 
 import org.springframework.http.HttpStatus;
 import com.opf.project.ExceptionHandler.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.opf.project.NumberClassification.NumberClassification;
+import com.opf.project.ExceptionHandler.ErrorDetails;
+import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +38,7 @@ public class ClassifyRESTController {
          * of the classified number
          */
         try {
-            Integer num = Integer.parseInt(number);
+            int num = Integer.parseInt(number);
             HashMap<String, Object> numberClassified = new HashMap<>();
 
             /*
@@ -53,7 +56,7 @@ public class ClassifyRESTController {
             numberClassified.put("digit_sum", numberClassification.digitSum());
             numberClassified.put("fun_fact", numberClassification.funFact());
             
-            return new ResponseEntity(numberClassified, HttpStatus.OK)
+            return new ResponseEntity(numberClassified, HttpStatus.OK);
         }
         catch(ResourceNotFoundException ex) {
             return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
