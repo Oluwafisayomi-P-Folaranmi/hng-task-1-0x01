@@ -18,14 +18,15 @@ public class ClassifyRESTController {
      * @return numberClassified
      */
     @GetMapping("/classify-number/{number}")
-    public Map<String, Object> classifyNumber(@PathVariable String number) {
+    public ResponseEntity<?> classifyNumber(@PathVariable String number) {
 
         /*
          * Check for exception in the path variable
+         * + if number is a character other than 1 - infinity
          */
         if (!isValidInteger(number)) {
             // If it's not a valid integer, return a 400 error response
-            return new ErrorResponse(number,"Invalid number format");
+            return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
         }
 
         /*
@@ -41,7 +42,7 @@ public class ClassifyRESTController {
         numberClassified.put("digit_sum", numberClassification.digitSum());
         numberClassified.put("fun_fact", numberClassification.funFact());
 
-        return numberClassified;
+        return new ResponseEntity(numberClassified, HttpStatus.OK);
     }
 
     // Helper method
