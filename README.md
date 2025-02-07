@@ -1,4 +1,4 @@
-# HNG Stage 0
+# HNG Stage 1
 
 ### Overview
 
@@ -6,7 +6,7 @@ The **HNG Stage-1** project is a Spring Boot application designed to manage and 
 
 ### Features
 
-+ **Display Project Information**: View project information using keys.
++ **Classify number**: View project information using keys.
 + **RESTful API**: Exposed endpoints to interact with the project data.
 + **Spring Boot**: Utilizes the Spring Boot framework for rapid development and deployment.
 

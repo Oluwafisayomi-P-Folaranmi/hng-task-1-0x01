@@ -1,5 +1,6 @@
 package com.opf.project.ClassifyRESTController;
 
+import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import com.opf.project.NumberClassification.NumberClassification;
 
@@ -19,8 +20,17 @@ public class ClassifyRESTController {
     @GetMapping("/classify-number/{number}")
     public Map<String, Object> classifyNumber(@PathVariable Integer number) {
 
-        // The record to store the information
-        // of the classified number.
+        /*
+         * Check for exception in the path variable
+         */
+        if (number <= 0) {
+            throw new ResourceNotFoundException();
+        }
+
+        /*
+         * The record to store the information
+         * of the classified number.
+         */
         HashMap<String, Object> numberClassified = new HashMap<>();
         NumberClassification numberClassification = new NumberClassification(number);
         numberClassified.put("number", numberClassification.getNumber());
