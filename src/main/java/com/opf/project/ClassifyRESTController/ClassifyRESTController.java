@@ -1,5 +1,6 @@
 package com.opf.project.ClassifyRESTController;
 
+import org.springframework.http.HttpStatus;
 import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import com.opf.project.NumberClassification.NumberClassification;
