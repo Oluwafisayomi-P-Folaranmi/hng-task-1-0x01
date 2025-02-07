@@ -2,17 +2,20 @@
 
 ### Overview
 
-The **HNG Stage-1** project is a Spring Boot application designed to manage and display information of the current project. This project may provide a simple and efficient way to keep track of project details at real time, ensuring that the information is easily accessible and manageable.
+The **HNG Stage-1** project is a Spring Boot application designed to classify number which is passed as parameter at the endpoint.
 
 ### Features
 
-+ **Classify number**: View project information using keys.
-+ **RESTful API**: Exposed endpoints to interact with the project data.
++ **Classify number**: View properties of number.
++ **RESTful API**: Exposed endpoints to interact with the project.
 + **Spring Boot**: Utilizes the Spring Boot framework for rapid development and deployment.
 
-### Endpoint
+### Endpoint/Usage
 
-+ GET `/api/classify-number/9474`: Retrieves project information in json.
+Once the application is running, you can access the **number** information by making a GET request to the endpoint as described below.
+
++ GET `/api/classify-number/<number-of-choice>`: Retrieves project information in json.
+  - An example endpoint is: `/api/classify-number/9474`, with response is as follows,
 
 ```json
     {
@@ -28,20 +31,9 @@ The **HNG Stage-1** project is a Spring Boot application designed to manage and 
     }
 ```
 
-### Getting Started
-
-
-### Usage
-
-Once the application is running, you can access the project information by navigating to ***<>*** in your web browser or by making a GET request to the ***<>*** endpoint.
-
 ### Contributing
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
 ### License
 
 &copy; 2024 Oluwafisayomi Folaranmi. All rights reserved.
-=======
-# hng-task-1-0x01
-hng-task-1-0x01
->>>>>>> origin/main
