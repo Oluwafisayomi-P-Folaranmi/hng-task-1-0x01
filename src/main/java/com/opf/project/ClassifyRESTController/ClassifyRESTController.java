@@ -37,6 +37,13 @@ public class ClassifyRESTController {
         try {
             Integer num = Integer.parseInt(number);
             HashMap<String, Object> numberClassified = new HashMap<>();
+
+            /*
+             * Check if integer is negative
+             */
+            if (num < 0) {
+                throw new NumberFormatException();
+            }
             
             NumberClassification numberClassification = new NumberClassification(num);
             numberClassified.put("number", numberClassification.getNumber());
