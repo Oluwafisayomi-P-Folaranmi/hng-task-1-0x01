@@ -1,9 +1,7 @@
 package com.opf.project.ClassifyRESTController;
 
 import com.opf.project.ExceptionHandler.ErrorDetails;
-import com.opf.project.ExceptionHandler.GlobalExceptionHandler;
 import com.opf.project.ExceptionHandler.NotANumberException;
-import com.opf.project.ExceptionHandler.ResourceNotFoundException;
 import com.opf.project.NumberClassification.NumberClassification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,9 @@ public class ClassifyRESTController {
      * @return numberClassified
      */
     @GetMapping("/classify-number/{number}")
-    public ResponseEntity<?> classifyNumber(@PathVariable String number) {
+    public ResponseEntity<?> classifyNumber(
+            @PathVariable String number
+    ) {
 
         /*
          * Check for exception in the path variable
@@ -46,7 +46,7 @@ public class ClassifyRESTController {
              * Check if integer is negative
              */
             if (num < 0) {
-                throw new ResourceNotFoundException();
+                throw new NotANumberException();
             }
             
             NumberClassification numberClassification = new NumberClassification(num);
@@ -55,11 +55,11 @@ public class ClassifyRESTController {
             numberClassified.put("is_perfect", numberClassification.isPerfect());
             numberClassified.put("properties", numberClassification.getProperties());
             numberClassified.put("digit_sum", numberClassification.digitSum());
-            numberClassified.put("fun_fact", numberClassification.funFact());
+            numberClassified.put("fun_fact", numberClassification.apiFunFact());
             
             return new ResponseEntity(numberClassified, HttpStatus.OK);
         }
-        catch(ResourceNotFoundException ex) {
+        catch(NotANumberException ex) {
             return new ResponseEntity(new ErrorDetails("alphabet", true), HttpStatus.BAD_REQUEST);
         }
     }

@@ -1,5 +1,7 @@
 package com.opf.project.NumberClassification;
 
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +123,16 @@ public class NumberClassification {
         else {
             return "not an Armstrong";
         }
+    }
+
+    // fun fact
+    // + anything funny
+    public String apiFunFact() {
+        RestTemplate restTemplate = new RestTemplate();
+        String numberApi = "http://numbersapi.com/"+ number + "/math";
+        String response = restTemplate.getForObject(numberApi , String.class);
+
+        return response;
     }
 
     // The digits

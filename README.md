@@ -36,4 +36,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ### License
 
-&copy; 2024 Oluwafisayomi Folaranmi. All rights reserved.
+&copy; 2025 Oluwafisayomi Folaranmi. All rights reserved.
