@@ -22,7 +22,7 @@ public class ClassifyRESTController {
      */
     @GetMapping("/classify-number/{number}")
     public ResponseEntity<?> classifyNumber(
-            @PathVariable String number
+            @RequestParam String number
     ) {
 
         /*
